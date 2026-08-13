@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { SEED_COMERCIOS, SEED_PRODUCTOS } from "./seed";
 import type { Comercio, EstadoPedido, Pedido, PedidoItem, Producto } from "./types";
 
@@ -63,11 +63,14 @@ function subscribe(l: () => void) {
 }
 
 export function useAppState<T>(selector: (s: AppState) => T): T {
-  return useSyncExternalStore(
+  const snapshot = useSyncExternalStore(
     subscribe,
-    () => selector(state),
-    () => selector(initial),
+    () => state,
+    () => initial,
   );
+  // El selector puede devolver arrays nuevos: memoizamos sobre el snapshot estable.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useMemo(() => selector(snapshot), [snapshot]);
 }
 
 export function getState() {
