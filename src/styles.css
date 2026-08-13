@@ -209,3 +209,17 @@
   font-size: 9px;
   opacity: 0.7;
 }
+
+.cercano-pin-wrapper {
+  width: max-content !important;
+  height: auto !important;
+  transform-origin: center;
+}
+
+.cercano-pin-wrapper > .cercano-pin {
+  transform: translate(-50%, -50%);
+}
+
+.cercano-pin-wrapper > .cercano-pin--match {
+  transform: translate(-50%, -50%) scale(1.06);
+}
