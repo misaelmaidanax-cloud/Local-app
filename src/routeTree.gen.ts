@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ComercioRouteImport } from './routes/comercio'
+import { Route as MisPedidosRouteImport } from './routes/mis-pedidos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const ComercioRoute = ComercioRouteImport.update({
   path: '/comercio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MisPedidosRoute = MisPedidosRouteImport.update({
+  id: '/mis-pedidos',
+  path: '/mis-pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/comercio': typeof ComercioRoute
+  '/mis-pedidos': typeof MisPedidosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/comercio': typeof ComercioRoute
+  '/mis-pedidos': typeof MisPedidosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/comercio': typeof ComercioRoute
+  '/mis-pedidos': typeof MisPedidosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/comercio'
+  fullPaths: '/' | '/admin' | '/comercio' | '/mis-pedidos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/comercio'
-  id: '__root__' | '/' | '/admin' | '/comercio'
+  to: '/' | '/admin' | '/comercio' | '/mis-pedidos'
+  id: '__root__' | '/' | '/admin' | '/comercio' | '/mis-pedidos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   ComercioRoute: typeof ComercioRoute
+  MisPedidosRoute: typeof MisPedidosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComercioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mis-pedidos': {
+      id: '/mis-pedidos'
+      path: '/mis-pedidos'
+      fullPath: '/mis-pedidos'
+      preLoaderRoute: typeof MisPedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   ComercioRoute: ComercioRoute,
+  MisPedidosRoute: MisPedidosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
