@@ -1,0 +1,108 @@
+import type { Comercio, Horario, Producto } from "./types";
+
+const h = (abre = "08:00", cierra = "22:00"): Horario => ({
+  lun: { abre, cierra, cerrado: false },
+  mar: { abre, cierra, cerrado: false },
+  mie: { abre, cierra, cerrado: false },
+  jue: { abre, cierra, cerrado: false },
+  vie: { abre, cierra, cerrado: false },
+  sab: { abre, cierra, cerrado: false },
+  dom: { abre: "09:00", cierra: "14:00", cerrado: false },
+});
+
+export const SEED_COMERCIOS: Comercio[] = [
+  {
+    id: "c1",
+    nombre: "Kiosco El Trébol",
+    direccion: "Av. Rivadavia 4820",
+    lat: -34.6165,
+    lng: -58.4405,
+    rubro: "kiosco",
+    whatsapp: "5491122334455",
+    horario: h("07:00", "23:30"),
+    activo: true,
+  },
+  {
+    id: "c2",
+    nombre: "Almacén Doña Rosa",
+    direccion: "Bogotá 132",
+    lat: -34.6198,
+    lng: -58.4342,
+    rubro: "almacen",
+    whatsapp: "5491133445566",
+    horario: h("08:30", "21:00"),
+    activo: true,
+  },
+  {
+    id: "c3",
+    nombre: "Autoservicio La Esquina",
+    direccion: "Hidalgo 950",
+    lat: -34.6132,
+    lng: -58.4348,
+    rubro: "almacen",
+    whatsapp: "5491144556677",
+    horario: h("09:00", "20:00"),
+    activo: true,
+  },
+  {
+    id: "c4",
+    nombre: "Verdulería Don Pepe",
+    direccion: "Ambrosetti 210",
+    lat: -34.6221,
+    lng: -58.4451,
+    rubro: "verduleria",
+    whatsapp: "5491155667788",
+    horario: h("07:30", "20:30"),
+    activo: true,
+  },
+  {
+    id: "c5",
+    nombre: "Ferretería Central",
+    direccion: "Av. La Plata 1120",
+    lat: -34.6249,
+    lng: -58.4308,
+    rubro: "ferreteria",
+    whatsapp: "5491166778899",
+    horario: h("08:00", "18:00"),
+    activo: true,
+  },
+];
+
+let n = 0;
+const p = (
+  comercioId: string,
+  nombre: string,
+  precio: number,
+  categoria: string,
+  disponible = true,
+): Producto => ({
+  id: `p${++n}`,
+  comercioId,
+  nombre,
+  fotoUrl: "",
+  precio,
+  categoria,
+  disponible,
+  actualizado: new Date().toISOString(),
+});
+
+export const SEED_PRODUCTOS: Producto[] = [
+  p("c1", "Coca Cola 1.5L", 2350, "Bebidas"),
+  p("c1", "Pilas AA x2", 1900, "Bazar"),
+  p("c1", "Alfajor Jorgito", 650, "Golosinas"),
+  p("c1", "Agua mineral 500ml", 900, "Bebidas"),
+  p("c2", "Coca Cola 1.5L", 2190, "Bebidas"),
+  p("c2", "Detergente 750ml", 2750, "Limpieza"),
+  p("c2", "Yerba mate 1kg", 6800, "Almacén"),
+  p("c2", "Pan lactal", 2400, "Almacén"),
+  p("c3", "Coca Cola 1.5L", 2480, "Bebidas"),
+  p("c3", "Detergente 750ml", 2590, "Limpieza"),
+  p("c3", "Pilas AA x2", 2100, "Bazar", false),
+  p("c3", "Leche entera 1L", 1750, "Almacén"),
+  p("c4", "Tomate perita 1kg", 1990, "Frutas y verduras"),
+  p("c4", "Banana 1kg", 1650, "Frutas y verduras"),
+  p("c4", "Papa 1kg", 1200, "Frutas y verduras"),
+  p("c5", "Pilas AA x2", 1750, "Bazar"),
+  p("c5", "Cinta aisladora", 1450, "Electricidad"),
+  p("c5", "Foco LED 9W", 3200, "Electricidad"),
+];

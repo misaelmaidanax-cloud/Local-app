@@ -10,33 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ComercioRouteImport } from './routes/comercio'
+import { Route as MisPedidosRouteImport } from './routes/mis-pedidos'
+import { Route as PedidoPedidoIdRouteImport } from './routes/pedido.$pedidoId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComercioRoute = ComercioRouteImport.update({
+  id: '/comercio',
+  path: '/comercio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MisPedidosRoute = MisPedidosRouteImport.update({
+  id: '/mis-pedidos',
+  path: '/mis-pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PedidoPedidoIdRoute = PedidoPedidoIdRouteImport.update({
+  id: '/pedido/$pedidoId',
+  path: '/pedido/$pedidoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/comercio': typeof ComercioRoute
+  '/mis-pedidos': typeof MisPedidosRoute
+  '/pedido/$pedidoId': typeof PedidoPedidoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/comercio': typeof ComercioRoute
+  '/mis-pedidos': typeof MisPedidosRoute
+  '/pedido/$pedidoId': typeof PedidoPedidoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/comercio': typeof ComercioRoute
+  '/mis-pedidos': typeof MisPedidosRoute
+  '/pedido/$pedidoId': typeof PedidoPedidoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/admin' | '/comercio' | '/mis-pedidos' | '/pedido/$pedidoId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/admin' | '/comercio' | '/mis-pedidos' | '/pedido/$pedidoId'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/comercio'
+    | '/mis-pedidos'
+    | '/pedido/$pedidoId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  ComercioRoute: typeof ComercioRoute
+  MisPedidosRoute: typeof MisPedidosRoute
+  PedidoPedidoIdRoute: typeof PedidoPedidoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +94,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comercio': {
+      id: '/comercio'
+      path: '/comercio'
+      fullPath: '/comercio'
+      preLoaderRoute: typeof ComercioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mis-pedidos': {
+      id: '/mis-pedidos'
+      path: '/mis-pedidos'
+      fullPath: '/mis-pedidos'
+      preLoaderRoute: typeof MisPedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pedido/$pedidoId': {
+      id: '/pedido/$pedidoId'
+      path: '/pedido/$pedidoId'
+      fullPath: '/pedido/$pedidoId'
+      preLoaderRoute: typeof PedidoPedidoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  ComercioRoute: ComercioRoute,
+  MisPedidosRoute: MisPedidosRoute,
+  PedidoPedidoIdRoute: PedidoPedidoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
