@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 interface Props {
   nombre: string;
-  fotoUrl?: string;
+  fotoUrl?: string | undefined;
   className?: string;
 }
 
